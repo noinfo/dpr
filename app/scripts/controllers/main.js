@@ -24,7 +24,19 @@ angular.module('dprApp')
 
 
         $scope.createdprset = function() {
+
+            if($scope.dprsets.length > 0){
+                return new Object({
+                    count: $scope.dprsets[$scope.dprsets.length - 1].count,
+                    attack: $scope.dprsets[$scope.dprsets.length - 1].attack,
+                    damageDiceCount: $scope.dprsets[$scope.dprsets.length - 1].damageDiceCount,
+                    damageDiceSides: $scope.dprsets[$scope.dprsets.length - 1].damageDiceSides,
+                    damageDiceBonus: $scope.dprsets[$scope.dprsets.length - 1].damageDiceBonus
+                });
+            }
+
             return new Object ({
+                count: false,
                 attack: 10,
                 damageDiceCount: 1,
                 damageDiceSides: 6,
@@ -57,6 +69,27 @@ angular.module('dprApp')
             }
 
             return multiplicator;
+        };
+
+        $scope.calculateDpr = function (dprset) {
+
+            return $scope.calculateMultiplicator(dprset.attack) * ( dprset.damageDiceCount * ((dprset.damageDiceSides / 2) + dprset.damageDiceBonus) );
+        };
+
+        $scope.calculateTotalDpr = function () {
+            var totaldpr = 0;
+
+            angular.forEach($scope.dprsets,function(value, key){
+                if(value.count){
+                    totaldpr += $scope.calculateDpr(value);
+                }
+            });
+
+            return totaldpr;
+        };
+
+        $scope.removeDprset = function (key) {
+            $scope.dprsets.splice(key, 1);
         }
 
     });

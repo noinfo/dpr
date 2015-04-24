@@ -9,13 +9,15 @@
   <h2>Values</h2>
 
   <h4>Global Values</h4>
+  <hr/>
   <div>
     <label for="difficulty">Difficulty: </label> <input type="number" class="short-num" ng-model="difficulty" id="difficulty" required />
   </div>
-
+  <br/><br/>
   <h4>Dynamic Values & Calculation </h4>
-  <div ng-repeat="dprset in dprsets">
-
+  <hr/>
+  <div ng-repeat="(key, dprset) in dprsets">
+    <input type="checkbox" ng-model="dprset.count"/>
     <label>Attack: </label> +<input type="number" class="short-num" ng-model="dprset.attack" required >
 
     <label>Damage: </label>
@@ -26,15 +28,17 @@
     </select>
     + <input type="number" class="short-num" ng-model="dprset.damageDiceBonus" required /> =
     <span>
-      {{ calculateMultiplicator(dprset.attack) * ( dprset.damageDiceCount * ((dprset.damageDiceSides / 2) + dprset.damageDiceBonus) ) }}
+      {{ calculateDpr(dprset) }}
     </span>
     <span class="calculation-details">
       ( {{ dprset.damageDiceCount * (dprset.damageDiceSides / 2) + dprset.damageDiceBonus }} * {{ calculateMultiplicator(dprset.attack) }} )
     </span>
-
+    <button ng-click="removeDprset(key)">-</button>
   </div>
-
-
   <button ng-click="dprsets.push(createdprset())">+</button>
+  <hr/>
+  <span>
+    Total DPR of checked items: {{calculateTotalDpr()}}
+  </span>
 
 </div>
