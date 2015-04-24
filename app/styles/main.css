@@ -81,3 +81,13 @@ body {
     border-bottom: 0;
   }
 }
+
+.short-num {
+  width: 50px;
+  text-align: center;
+}
+
+.calculation-details {
+  font-size: small;
+  color: darkgray;
+}

@@ -10,24 +10,28 @@
 
   <h4>Global Values</h4>
   <div>
-    <label for="difficulty">Difficulty: </label> <input type="number" ng-model="difficulty" id="difficulty" required >
+    <label for="difficulty">Difficulty: </label> <input type="number" class="short-num" ng-model="difficulty" id="difficulty" required />
   </div>
 
-  <h4>Dynamic Values</h4>
+  <h4>Dynamic Values & Calculation </h4>
   <div>
-    <label for="attack">Attack: </label> +<input type="number" ng-model="attack" id="attack" required >
-    <input type="number" min="1" ng-model="damageDiceCount" required > D
+    <label>Attack: </label> +<input type="number" class="short-num" ng-model="attack" id="attack" required >
+
+    <label>Damage: </label>
+    <input type="number" class="short-num" min="1" ng-model="damageDiceCount" required /> D
 
     <select ng-model="damageDiceSides">
       <option ng-repeat="dice in damageDiceSideOptions">{{dice}}</option>
     </select>
-    + <input type="number" min="1" ng-model="damageDiceBonus" required >
+    + <input type="number" class="short-num" ng-model="damageDiceBonus" required /> =
+    <span>
+      {{ calculateMultiplicator() * ( damageDiceCount * ((damageDiceSides / 2) + damageDiceBonus) ) }}
+    </span>
+    <span class="calculation-details">
+      ( {{ damageDiceCount * (damageDiceSides / 2) + damageDiceBonus }} * {{ calculateMultiplicator() }} )
+    </span>
 
   </div>
 
-  <h4>Resulting DPR</h4>
-  <div>
-    {{ damageDiceCount * (damageDiceSides / 2) + damageDiceBonus }} * {{ calculateMultiplicator() }} = {{ calculateMultiplicator() * ( damageDiceCount * ((damageDiceSides / 2) + damageDiceBonus) ) }}
-  </div>
 
 </div>
