@@ -6,16 +6,29 @@
 </div>
 
 <div class="row marketing">
-  <h4>HTML5 Boilerplate</h4>
-  <p>
-    HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.
-  </p>
+  <h2>Values</h2>
 
-  <h4>Angular</h4>
-  <p>
-    AngularJS is a toolset for building the framework most suited to your application development.
-  </p>
+  <h4>Global Values</h4>
+  <div>
+    <label for="difficulty">Difficulty: </label> <input type="number" min="1" ng-model="difficulty" id="difficulty" required >
+  </div>
 
-  <h4>Karma</h4>
-  <p>Spectacular Test Runner for JavaScript.</p>
+  <h4>Dynamic Values</h4>
+  <div>
+    <label for="attack">Attack: </label> <input type="number" min="1" ng-model="attack" id="attack" required >
+    <br/>
+    <input type="number" min="1" ng-model="damageDiceCount" required > D
+
+    <select ng-model="damageDiceSides">
+      <option ng-repeat="dice in damageDiceSideOptions">{{dice}}</option>
+    </select>
+    + <input type="number" min="1" ng-model="damageDiceBonus" required >
+
+  </div>
+
+  <h4>Resulting DPR</h4>
+  <div>
+    {{ damageDiceCount * (damageDiceSides / 2) + damageDiceBonus }}
+  </div>
+
 </div>
