@@ -15,8 +15,7 @@
 
   <h4>Dynamic Values</h4>
   <div>
-    <label for="attack">Attack: </label> <input type="number" min="1" ng-model="attack" id="attack" required >
-    <br/>
+    <label for="attack">Attack: </label> +<input type="number" min="1" ng-model="attack" id="attack" required >
     <input type="number" min="1" ng-model="damageDiceCount" required > D
 
     <select ng-model="damageDiceSides">
@@ -28,7 +27,7 @@
 
   <h4>Resulting DPR</h4>
   <div>
-    {{ damageDiceCount * (damageDiceSides / 2) + damageDiceBonus }}
+    {{ damageDiceCount * (damageDiceSides / 2) + damageDiceBonus }} * {{ calculateMultiplicator() }} = {{ calculateMultiplicator() * ( damageDiceCount * ((damageDiceSides / 2) + damageDiceBonus) ) }}
   </div>
 
 </div>
