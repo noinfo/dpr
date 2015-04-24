@@ -36,15 +36,15 @@ angular.module('dprApp')
             }
 
             multiplicator = 1 - ( -1 * ( attack - difficulty ) * 0.05 );
-
+            // 0.05 percent chance to miss (1 is always a miss)
             if(multiplicator === 0 || multiplicator >= 1){
                 return 0.95;
             }
 
+            // 0.05 percent chance to hit (20 is always a hit)
             if(multiplicator <= 0.05){
                 return 0.05;
             }
-
 
             return multiplicator;
         }
