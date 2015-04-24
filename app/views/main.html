@@ -14,24 +14,27 @@
   </div>
 
   <h4>Dynamic Values & Calculation </h4>
-  <div>
-    <label>Attack: </label> +<input type="number" class="short-num" ng-model="attack" id="attack" required >
+  <div ng-repeat="dprset in dprsets">
+
+    <label>Attack: </label> +<input type="number" class="short-num" ng-model="dprset.attack" required >
 
     <label>Damage: </label>
-    <input type="number" class="short-num" min="1" ng-model="damageDiceCount" required /> D
+    <input type="number" class="short-num" min="1" ng-model="dprset.damageDiceCount" required /> D
 
-    <select ng-model="damageDiceSides">
+    <select ng-model="dprset.damageDiceSides">
       <option ng-repeat="dice in damageDiceSideOptions">{{dice}}</option>
     </select>
-    + <input type="number" class="short-num" ng-model="damageDiceBonus" required /> =
+    + <input type="number" class="short-num" ng-model="dprset.damageDiceBonus" required /> =
     <span>
-      {{ calculateMultiplicator() * ( damageDiceCount * ((damageDiceSides / 2) + damageDiceBonus) ) }}
+      {{ calculateMultiplicator(dprset.attack) * ( dprset.damageDiceCount * ((dprset.damageDiceSides / 2) + dprset.damageDiceBonus) ) }}
     </span>
     <span class="calculation-details">
-      ( {{ damageDiceCount * (damageDiceSides / 2) + damageDiceBonus }} * {{ calculateMultiplicator() }} )
+      ( {{ dprset.damageDiceCount * (dprset.damageDiceSides / 2) + dprset.damageDiceBonus }} * {{ calculateMultiplicator(dprset.attack) }} )
     </span>
 
   </div>
 
+
+  <button ng-click="dprsets.push(createdprset())">+</button>
 
 </div>

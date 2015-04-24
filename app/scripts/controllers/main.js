@@ -15,21 +15,31 @@ angular.module('dprApp')
             'Karma'
         ];
 
-        $scope.difficulty = 15;
-        $scope.attack = 10;
-
         $scope.damageDiceSideOptions = ['2','4', '6', '8', '10', '12','20', '100'];
+        $scope.difficulty = 15;
 
-        $scope.damageDiceCount = 1;
-        $scope.damageDiceSides = 6;
-        $scope.damageDiceBonus = 2;
+        $scope.dprsets = [];
 
-        $scope.calculateMultiplicator = function(){
+
+
+
+        $scope.createdprset = function() {
+            return new Object ({
+                attack: 10,
+                damageDiceCount: 1,
+                damageDiceSides: 6,
+                damageDiceBonus: 2
+            });
+        };
+
+        $scope.dprsets.push($scope.createdprset());
+
+        $scope.calculateMultiplicator = function(attackTemp){
             var multiplicator = 0,
                 attack = 0, difficulty = 0;
 
-            if(angular.isNumber($scope.attack)){
-                attack = $scope.attack;
+            if(angular.isNumber(attackTemp)){
+                attack = attackTemp;
             }
             if(angular.isNumber($scope.difficulty)){
                 difficulty = $scope.difficulty;
