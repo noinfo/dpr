@@ -27,6 +27,7 @@ angular.module('dprApp')
         $scope.calculateMultiplicator = function(){
             var multiplicator = 0,
                 attack = 0, difficulty = 0;
+
             if(angular.isNumber($scope.attack)){
                 attack = $scope.attack;
             }
@@ -39,6 +40,11 @@ angular.module('dprApp')
             if(multiplicator === 0 || multiplicator >= 1){
                 return 0.95;
             }
+
+            if(multiplicator <= 0.05){
+                return 0.05;
+            }
+
 
             return multiplicator;
         }
