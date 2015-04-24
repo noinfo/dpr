@@ -16,9 +16,9 @@
   <br/><br/>
   <h4>Dynamic Values & Calculation </h4>
   <hr/>
-  <div ng-repeat="(key, dprset) in dprsets">
-    <input type="checkbox" ng-model="dprset.count"/>
-    <label>Attack: </label> +<input type="number" class="short-num" ng-model="dprset.attack" required >
+  <div ng-repeat="(key, dprset) in dprsets" class="calculation-row">
+    <input type="checkbox" ng-model="dprset.count" title="Count this item for the total DPR"/>
+    <label> Attack: </label> <input type="number" class="short-num" ng-model="dprset.attack" required >
 
     <label>Damage: </label>
     <input type="number" class="short-num" min="1" ng-model="dprset.damageDiceCount" required /> D
@@ -33,9 +33,10 @@
     <span class="calculation-details">
       ( {{ dprset.damageDiceCount * (dprset.damageDiceSides / 2) + dprset.damageDiceBonus }} * {{ calculateMultiplicator(dprset.attack) }} )
     </span>
-    <button ng-click="removeDprset(key)">-</button>
+    <button ng-click="removeDprset(key)" title="Remove this row">-</button>
   </div>
-  <button ng-click="dprsets.push(createdprset())">+</button>
+  <br/>
+  <button ng-click="dprsets.push(createdprset())" title="Add another row">+</button>
   <hr/>
   <span>
     Total DPR of checked items: {{calculateTotalDpr()}}
