@@ -118,4 +118,12 @@ angular.module('dprApp')
             return $localStorage;
         };
 
+        $scope.reset = function() {
+            $scope.dprsetName = '';
+            $scope.loadDprsetName = '';
+            $scope.dprsets = [];
+            $scope.dprsets.push($scope.createdprset());
+
+        };
+
     });

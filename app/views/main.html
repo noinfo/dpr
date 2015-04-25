@@ -54,7 +54,7 @@
     <option value="" disabled>choose a set to load</option>
     <option ng-repeat="(key,set) in getSavedSets()">{{key}}</option>
   </select>
-  <button ng-click="loadDprsets()">Load</button>
+  <button ng-click="loadDprsets()">Load</button> <span class="horizontal-spacer"></span> <button ng-click="reset()">Reset Form</button>
 
 
 </div>
