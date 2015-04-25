@@ -110,6 +110,7 @@ angular.module('dprApp')
             if($scope.loadDprsetName == ''){
                 return;
             }
+            $scope.dprsetName = $scope.loadDprsetName;
             $scope.dprsets = $localStorage[$scope.loadDprsetName];
         };
 
