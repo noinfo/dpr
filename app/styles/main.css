@@ -82,6 +82,15 @@ body {
   }
 }
 
+/********************************/
+.smalltext {
+  font-size: smaller;
+  color: darkgray;
+}
+
+.horizontal-spacer {
+  padding: 0 1em;
+}
 
 .calculation-row {
   padding: 0.25em 0;

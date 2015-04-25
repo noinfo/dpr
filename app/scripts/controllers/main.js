@@ -8,20 +8,15 @@
  * Controller of the dprApp
  */
 angular.module('dprApp')
-    .controller('MainCtrl', function ($scope) {
-        $scope.awesomeThings = [
-            'HTML5 Boilerplate',
-            'AngularJS',
-            'Karma'
-        ];
+    .controller('MainCtrl', function ($scope,$localStorage) {
 
         $scope.damageDiceSideOptions = ['2','4', '6', '8', '10', '12','20', '100'];
         $scope.difficulty = 15;
 
         $scope.dprsets = [];
 
-
-
+        $scope.dprsetName = '';
+        $scope.loadDprsetName = '';
 
         $scope.createdprset = function() {
 
@@ -99,8 +94,25 @@ angular.module('dprApp')
             return totaldpr;
         };
 
-        $scope.removeDprset = function (key) {
+        $scope.removeFromDprsets = function (key) {
             $scope.dprsets.splice(key, 1);
+        };
+
+        $scope.saveDprsets = function(){
+            if($scope.dprsetName == ''){
+                return;
+            }
+            $localStorage[$scope.dprsetName] = $scope.dprsets;
+        };
+        $scope.loadDprsets = function(){
+            if($scope.loadDprsetName == ''){
+                return;
+            }
+            $scope.dprsets = $localStorage[$scope.loadDprsetName];
+        };
+
+        $scope.getSavedSets = function() {
+            return $localStorage;
         }
 
     });

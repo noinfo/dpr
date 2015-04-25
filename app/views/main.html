@@ -6,12 +6,15 @@
 </div>
 
 <div class="row marketing">
+
   <h4>Global Values</h4>
   <hr/>
   <div>
     <label for="difficulty">Difficulty: </label> <input type="number" class="short-num" ng-model="difficulty" id="difficulty" required />
   </div>
   <br/><br/>
+
+
   <h4>Dynamic Values & Calculation </h4>
   <hr/>
   <div ng-repeat="(key, dprset) in dprsets" class="calculation-row">
@@ -31,7 +34,7 @@
     <span class="calculation-details">
       ( {{ calculateDamage(dprset) }} * {{ calculateMultiplicator(dprset.attack) }} )
     </span>
-    <button ng-click="removeDprset(key)" title="Remove this row">-</button>
+    <button ng-click="removeFromDprsets(key)" title="Remove this row">-</button>
   </div>
   <br/>
   <button ng-click="dprsets.push(createdprset())" title="Add another row">+</button>
@@ -39,5 +42,19 @@
   <span>
     <strong>Total DPR of checked items: {{calculateTotalDpr()}}</strong>
   </span>
+  <hr/>
+
+  <br/><br/>
+
+  <h4>Loading and saving</h4>
+  <p class="smalltext">(in your browser!)</p>
+  <hr/>
+  <input type="text" placeholder="name your dpr set" ng-model="dprsetName"/> <button ng-click="saveDprsets()">Save</button> <span class="horizontal-spacer"></span>
+  <select ng-model="loadDprsetName">
+    <option value="" disabled>choose a set to load</option>
+    <option ng-repeat="(key,set) in getSavedSets()">{{key}}</option>
+  </select>
+  <button ng-click="loadDprsets()">Load</button>
+
 
 </div>
