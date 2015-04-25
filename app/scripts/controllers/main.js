@@ -20,6 +20,8 @@ angular.module('dprApp')
         $scope.dprsetName = '';
         $scope.loadDprsetName = '';
 
+        //$scope.serialized = '';
+
         $scope.createdprset = function() {
 
             if($scope.dprsets.length > 0){
@@ -56,7 +58,7 @@ angular.module('dprApp')
 
             multiplicator = 1 - ( -1 * ( attack - difficulty ) * 0.05 );
             // 0.05 percent chance to miss (1 is always a miss)
-            if(multiplicator === 0 || multiplicator >= 1){
+            if(multiplicator >= 1){
                 return 0.95;
             }
 
