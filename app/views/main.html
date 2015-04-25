@@ -29,7 +29,7 @@
       {{ calculateDpr(dprset) }}
     </span>
     <span class="calculation-details">
-      ( {{ dprset.damageDiceCount * (dprset.damageDiceSides / 2) + dprset.damageDiceBonus }} * {{ calculateMultiplicator(dprset.attack) }} )
+      ( {{ calculateDamage(dprset) }} * {{ calculateMultiplicator(dprset.attack) }} )
     </span>
     <button ng-click="removeDprset(key)" title="Remove this row">-</button>
   </div>

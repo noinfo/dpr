@@ -71,9 +71,20 @@ angular.module('dprApp')
             return multiplicator;
         };
 
+        $scope.calculateDamage = function (dprset) {
+            var damage = dprset.damageDiceCount * ((dprset.damageDiceSides / 2) + dprset.damageDiceBonus);
+
+            // minimum damage is 1 even if calculations result in something negative
+            if(damage <= 1){
+                return 1;
+            }
+
+            return damage;
+        };
+
         $scope.calculateDpr = function (dprset) {
 
-            return $scope.calculateMultiplicator(dprset.attack) * ( dprset.damageDiceCount * ((dprset.damageDiceSides / 2) + dprset.damageDiceBonus) );
+            return $scope.calculateMultiplicator(dprset.attack) * ( $scope.calculateDamage(dprset) );
         };
 
         $scope.calculateTotalDpr = function () {
