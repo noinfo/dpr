@@ -9,6 +9,8 @@
  */
 angular.module('dprApp')
     .controller('MainCtrl', function ($scope,$localStorage) {
+        // load math for rounding
+        $scope.Math = window.Math;
 
         $scope.damageDiceSideOptions = ['2','4', '6', '8', '10', '12','20', '100'];
         $scope.difficulty = 15;
@@ -113,6 +115,6 @@ angular.module('dprApp')
 
         $scope.getSavedSets = function() {
             return $localStorage;
-        }
+        };
 
     });

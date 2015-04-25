@@ -29,10 +29,10 @@
     </select>
     + <input type="number" class="short-num" ng-model="dprset.damageDiceBonus" required /> =
     <span>
-      {{ calculateDpr(dprset) }}
+      {{ round(calculateDpr(dprset)) }}
     </span>
     <span class="calculation-details">
-      ( {{ calculateDamage(dprset) }} * {{ calculateMultiplicator(dprset.attack) }} )
+      ( {{ calculateDamage(dprset) | number }} * {{ calculateMultiplicator(dprset.attack) | number }} )
     </span>
     <button ng-click="removeFromDprsets(key)" title="Remove this row">-</button>
   </div>
@@ -40,7 +40,7 @@
   <button ng-click="dprsets.push(createdprset())" title="Add another row">+</button>
   <hr/>
   <span>
-    <strong>Total DPR of checked items: {{calculateTotalDpr()}}</strong>
+    <strong>Total DPR of checked items: {{calculateTotalDpr() | number }}</strong>
   </span>
   <hr/>
 
