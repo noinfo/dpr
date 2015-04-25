@@ -2,11 +2,15 @@
   "name": "dpr",
   "version": "0.0.0",
   "dependencies": {
+    "bl": "^0.9.4",
     "chalk": "^0.5.1",
+    "end-of-stream": "^1.1.0",
     "findup-sync": "^0.2.1",
     "hooker": "^0.2.3",
     "multimatch": "^2.0.0",
-    "text-table": "^0.2.0"
+    "readable-stream": "^1.0.33",
+    "text-table": "^0.2.0",
+    "xtend": "^4.0.0"
   },
   "repository": {},
   "devDependencies": {
