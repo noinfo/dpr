@@ -8,7 +8,7 @@
  * Controller of the dprApp
  */
 angular.module('dprApp')
-    .controller('MainCtrl', function ($scope,$localStorage) {
+    .controller('MainCtrl', function ($scope,$localStorage, randomstring) {
         // load math for rounding
         $scope.Math = window.Math;
 
@@ -16,21 +16,22 @@ angular.module('dprApp')
         $scope.difficulty = 15;
 
         $scope.dprsets = [];
+        $scope.dprrows = [];
 
-        $scope.dprsetName = '';
+        $scope.dprsetName = randomstring.generateid();
         $scope.loadDprsetName = '';
 
-        //$scope.serialized = '';
+        $scope.serialized = '';
 
-        $scope.createdprset = function() {
+        $scope.createdprrow = function() {
 
-            if($scope.dprsets.length > 0){
+            if($scope.dprrows.length > 0){
                 return new Object({
-                    count: $scope.dprsets[$scope.dprsets.length - 1].count,
-                    attack: $scope.dprsets[$scope.dprsets.length - 1].attack,
-                    damageDiceCount: $scope.dprsets[$scope.dprsets.length - 1].damageDiceCount,
-                    damageDiceSides: $scope.dprsets[$scope.dprsets.length - 1].damageDiceSides,
-                    damageDiceBonus: $scope.dprsets[$scope.dprsets.length - 1].damageDiceBonus
+                    count: $scope.dprrows[$scope.dprrows.length - 1].count,
+                    attack: $scope.dprrows[$scope.dprrows.length - 1].attack,
+                    damageDiceCount: $scope.dprrows[$scope.dprrows.length - 1].damageDiceCount,
+                    damageDiceSides: $scope.dprrows[$scope.dprrows.length - 1].damageDiceSides,
+                    damageDiceBonus: $scope.dprrows[$scope.dprrows.length - 1].damageDiceBonus
                 });
             }
 
@@ -43,7 +44,9 @@ angular.module('dprApp')
             });
         };
 
-        $scope.dprsets.push($scope.createdprset());
+        // save demo data
+        $scope.dprrows.push($scope.createdprrow());
+        $scope.dprsets.push(new Object({name:$scope.dprsetName, data:$scope.dprrows}));
 
         $scope.calculateMultiplicator = function(attackTemp){
             var multiplicator = 0,
@@ -89,7 +92,7 @@ angular.module('dprApp')
         $scope.calculateTotalDpr = function () {
             var totaldpr = 0;
 
-            angular.forEach($scope.dprsets,function(value, key){
+            angular.forEach($scope.dprrows,function(value, key){
                 if(value.count){
                     totaldpr += $scope.calculateDpr(value);
                 }
@@ -98,34 +101,38 @@ angular.module('dprApp')
             return totaldpr;
         };
 
-        $scope.removeFromDprsets = function (key) {
-            $scope.dprsets.splice(key, 1);
+        $scope.removeDprrow = function (key) {
+            $scope.dprrows.splice(key, 1);
         };
 
         $scope.saveDprsets = function(){
             if($scope.dprsetName == ''){
                 return;
             }
-            $localStorage[$scope.dprsetName] = $scope.dprsets;
+            $localStorage[$scope.dprsetName] = $scope.dprrows;
         };
         $scope.loadDprsets = function(){
             if($scope.loadDprsetName == ''){
                 return;
             }
             $scope.dprsetName = $scope.loadDprsetName;
-            $scope.dprsets = $localStorage[$scope.loadDprsetName];
+            $scope.dprrows = $localStorage[$scope.loadDprsetName];
         };
 
         $scope.getSavedSets = function() {
+
             return $localStorage;
         };
 
         $scope.reset = function() {
             $scope.dprsetName = '';
             $scope.loadDprsetName = '';
-            $scope.dprsets = [];
-            $scope.dprsets.push($scope.createdprset());
+            $scope.dprrows = [];
+            $scope.dprrows.push($scope.createdprrow());
 
+        };
+        $scope.serialize = function () {
+            return console.log(angular.toJson($scope.dprsets));
         };
 
     });

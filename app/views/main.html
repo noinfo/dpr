@@ -17,7 +17,7 @@
 
   <h4>Dynamic Values & Calculation </h4>
   <hr/>
-  <div ng-repeat="(key, dprset) in dprsets" class="calculation-row">
+  <div ng-repeat="(key, dprset) in dprrows" class="calculation-row">
     <input type="checkbox" ng-model="dprset.count" title="Count this item for the total DPR"/>
     <label> Attack: </label> <input type="number" class="short-num" ng-model="dprset.attack" required >
 
@@ -34,10 +34,10 @@
     <span class="calculation-details">
       ( {{ calculateDamage(dprset) | number }} * {{ calculateMultiplicator(dprset.attack) | number }} )
     </span>
-    <button ng-click="removeFromDprsets(key)" title="Remove this row">-</button>
+    <button ng-click="removeDprrow(key)" title="Remove this row">-</button>
   </div>
   <br/>
-  <button ng-click="dprsets.push(createdprset())" title="Add another row">+</button>
+  <button ng-click="dprrows.push(createdprrow())" title="Add another row">+</button>
   <hr/>
   <span>
     <strong>Total DPR of checked items: {{calculateTotalDpr() | number }}</strong>
@@ -55,6 +55,8 @@
     <option ng-repeat="(key,set) in getSavedSets()">{{key}}</option>
   </select>
   <button ng-click="loadDprsets()">Load</button> <span class="horizontal-spacer"></span> <button ng-click="reset()">Reset Form</button>
-
-
+  <br/>
+  <br/>
+  <textarea cols="30" rows="10" >{{dprsets|json}}</textarea>
+  <button ng-click="serialize()">Serialize</button>
 </div>
