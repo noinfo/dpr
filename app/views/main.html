@@ -15,7 +15,7 @@
   <br/><br/>
 
 
-  <h4>Dynamic Values & Calculation </h4>
+  <h4>Dynamic Values & Calculation for set '<span>{{currentset}}</span>'</h4>
   <hr/>
   <div ng-repeat="(key, dprset) in dprrows" class="calculation-row">
     <input type="checkbox" ng-model="dprset.count" title="Count this item for the total DPR"/>
@@ -49,14 +49,16 @@
   <h4>Loading and saving</h4>
   <p class="smalltext">(in your browser!)</p>
   <hr/>
-  <input type="text" placeholder="name your dpr set" ng-model="dprsetName"/> <button ng-click="saveDprsets()">Save</button> <span class="horizontal-spacer"></span>
+  <input type="text" placeholder="name your dpr set" ng-model="dprsetName"/> <button ng-click="renameDprset()">Rename Set</button> <span class="horizontal-spacer"></span>
+  <button ng-click="createNewSet()">Create new Set</button> <span class="horizontal-spacer"></span> <br/><br/>
   <select ng-model="loadDprsetName">
     <option value="" disabled>choose a set to load</option>
-    <option ng-repeat="(key,set) in getSavedSets()">{{key}}</option>
+    <option ng-repeat="(key,set) in getSavedSets()" value="{{key}}">{{set.name}}</option>
   </select>
   <button ng-click="loadDprsets()">Load</button> <span class="horizontal-spacer"></span> <button ng-click="reset()">Reset Form</button>
   <br/>
   <br/>
-  <textarea cols="30" rows="10" >{{dprsets|json}}</textarea>
-  <button ng-click="serialize()">Serialize</button>
+  <textarea cols="30" rows="10" class="fullwidth">{{dprsets|json}}</textarea>
+  <br/>
+  <button ng-click="deserialize()">Load from String</button>
 </div>

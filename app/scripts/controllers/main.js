@@ -20,6 +20,7 @@ angular.module('dprApp')
 
         $scope.dprsetName = randomstring.generateid();
         $scope.loadDprsetName = '';
+        $scope.currentset = $scope.dprsetName;
 
         $scope.serialized = '';
 
@@ -105,33 +106,67 @@ angular.module('dprApp')
             $scope.dprrows.splice(key, 1);
         };
 
-        $scope.saveDprsets = function(){
+        $scope.renameDprset = function(){
             if($scope.dprsetName == ''){
                 return;
             }
-            $localStorage[$scope.dprsetName] = $scope.dprrows;
+            var key = $scope.getDprsetKeyByName($scope.currentset);
+
+            if(key > -1){
+                console.log($scope.dprsets);
+                $scope.dprsets[key].name = $scope.dprsetName;
+                $scope.currentset = $scope.dprsetName;
+            }
+
+
+        };
+        $scope.getDprsetKeyByName = function(name){
+            var foundkey = -1;
+            if(name == ''){
+                return -1;
+            }
+
+            angular.forEach($scope.dprsets,function(value, key){
+                if(value.name == name){
+                     foundkey = key;
+                }
+            });
+            return foundkey;
         };
         $scope.loadDprsets = function(){
             if($scope.loadDprsetName == ''){
                 return;
             }
-            $scope.dprsetName = $scope.loadDprsetName;
-            $scope.dprrows = $localStorage[$scope.loadDprsetName];
+            $scope.dprsetName = $scope.dprsets[$scope.loadDprsetName].name;
+            $scope.currentset = $scope.dprsetName;
+            $scope.dprrows = $scope.dprsets[$scope.loadDprsetName].data;
         };
 
-        $scope.getSavedSets = function() {
-
-            return $localStorage;
-        };
-
-        $scope.reset = function() {
-            $scope.dprsetName = '';
+        $scope.createNewSet = function() {
+            $scope.dprsetName = randomstring.generateid();
+            $scope.currentset = $scope.dprsetName;
             $scope.loadDprsetName = '';
             $scope.dprrows = [];
             $scope.dprrows.push($scope.createdprrow());
+            $scope.dprsets.push(new Object({name:$scope.dprsetName, data:$scope.dprrows}));
+        };
+
+        $scope.getSavedSets = function() {
+            return $scope.dprsets;
+        };
+
+        $scope.reset = function() {
+            $scope.dprsetName = randomstring.generateid();
+            $scope.currentset = $scope.dprsetName;
+            $scope.loadDprsetName = '';
+            $scope.dprsets = [];
+            $scope.dprrows = [];
+            $scope.dprrows.push($scope.createdprrow());
+            $scope.dprsets.push(new Object({name:$scope.dprsetName, data:$scope.dprrows}));
 
         };
-        $scope.serialize = function () {
+
+        $scope.deserialize = function () {
             return console.log(angular.toJson($scope.dprsets));
         };
 
