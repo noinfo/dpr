@@ -50,8 +50,10 @@
   <p class="smalltext">(in your browser!)</p>
   <hr/>
   <input type="text" placeholder="name your dpr set" ng-model="dprsetName"/> <button ng-click="renameDprset()">Rename Set</button> <span class="horizontal-spacer"></span>
-  <button ng-click="deleteCurrentSet()">Delete current Set</button> <span class="horizontal-spacer"></span>
-  <button ng-click="createNewSet()">Create new Set</button> <span class="horizontal-spacer"></span> <br/><br/>
+  <button ng-click="createNewSet()">Create new Set</button> <span class="horizontal-spacer"></span>
+  <button ng-click="deleteCurrentSet()" >Delete current Set</button> <span class="horizontal-spacer"></span>
+
+  <br/><br/>
   <select ng-model="loadDprsetKey">
     <option value="" disabled>choose a set to load</option>
     <option ng-repeat="(key,set) in getSavedSets()" value="{{key}}">{{set.name}}</option>
