@@ -155,15 +155,17 @@ angular.module('dprApp')
             }
             var key = $scope.getDprsetKeyByName($scope.currentset);
 
-            if(key > -1){
+            if(key > -1 && window.confirm('Are you sure you want to delete the current set?')){
                 $scope.dprsets.splice(key, 1);
+
+                if($scope.dprsets.length < 1){
+                    $scope.createNewSet();
+                }else{
+                    $scope.loadDprsetKey = Object.keys($scope.dprsets)[0];
+                    $scope.loadDprset();
+                }
             }
-            if($scope.dprsets.length < 1){
-                $scope.createNewSet();
-            }else{
-                $scope.loadDprsetKey = Object.keys($scope.dprsets)[0];
-                $scope.loadDprset();
-            }
+
         };
 
         $scope.getSavedSets = function() {
