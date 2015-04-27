@@ -61,7 +61,11 @@
   <button ng-click="loadDprset()">Load</button> <span class="horizontal-spacer"></span> <button ng-click="reset()">Reset Everything</button>
   <br/>
   <br/>
-  <textarea cols="30" rows="10" class="fullwidth">{{dprsets|json}}</textarea>
+  <h4>Save the text below to be able to load your values later</h4>
+  <hr/>
+  <textarea cols="30" rows="10" class="fullwidth" readonly>{{dprsets|json}}</textarea>
   <br/>
-  <button ng-click="deserialize()">Load from String</button>
+  <br/>
+  <hr/>
+  <button ng-click="deserialize()">Load from saved Text</button>
 </div>

@@ -184,7 +184,15 @@ angular.module('dprApp')
         };
 
         $scope.deserialize = function () {
-            return console.log(angular.toJson($scope.dprsets));
+            var tempData = angular.fromJson(window.prompt('Paste your saved text here.'));
+
+            if(tempData && tempData.length > 0){
+                $scope.dprsets = tempData;
+                $scope.loadDprsetKey = Object.keys($scope.dprsets)[0];
+                $scope.loadDprset();
+            }
+
+            return tempData;
         };
 
     });
