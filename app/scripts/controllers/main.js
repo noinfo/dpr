@@ -19,7 +19,7 @@ angular.module('dprApp')
         $scope.dprrows = [];
 
         $scope.dprsetName = randomstring.generateid();
-        $scope.loadDprsetName = '';
+        $scope.loadDprsetKey = '';
         $scope.currentset = $scope.dprsetName;
 
         $scope.serialized = '';
@@ -113,11 +113,9 @@ angular.module('dprApp')
             var key = $scope.getDprsetKeyByName($scope.currentset);
 
             if(key > -1){
-                console.log($scope.dprsets);
                 $scope.dprsets[key].name = $scope.dprsetName;
                 $scope.currentset = $scope.dprsetName;
             }
-
 
         };
         $scope.getDprsetKeyByName = function(name){
@@ -133,22 +131,39 @@ angular.module('dprApp')
             });
             return foundkey;
         };
-        $scope.loadDprsets = function(){
-            if($scope.loadDprsetName == ''){
+        $scope.loadDprset = function(){
+            if($scope.loadDprsetKey == ''){
                 return;
             }
-            $scope.dprsetName = $scope.dprsets[$scope.loadDprsetName].name;
+            $scope.dprsetName = $scope.dprsets[$scope.loadDprsetKey].name;
             $scope.currentset = $scope.dprsetName;
-            $scope.dprrows = $scope.dprsets[$scope.loadDprsetName].data;
+            $scope.dprrows = $scope.dprsets[$scope.loadDprsetKey].data;
         };
 
         $scope.createNewSet = function() {
             $scope.dprsetName = randomstring.generateid();
             $scope.currentset = $scope.dprsetName;
-            $scope.loadDprsetName = '';
+            $scope.loadDprsetKey = '';
             $scope.dprrows = [];
             $scope.dprrows.push($scope.createdprrow());
             $scope.dprsets.push(new Object({name:$scope.dprsetName, data:$scope.dprrows}));
+        };
+
+        $scope.deleteCurrentSet = function() {
+            if($scope.currentset == ''){
+                return;
+            }
+            var key = $scope.getDprsetKeyByName($scope.currentset);
+
+            if(key > -1){
+                $scope.dprsets.splice(key, 1);
+            }
+            if($scope.dprsets.length < 1){
+                $scope.createNewSet();
+            }else{
+                $scope.loadDprsetKey = Object.keys($scope.dprsets)[0];
+                $scope.loadDprset();
+            }
         };
 
         $scope.getSavedSets = function() {
@@ -158,7 +173,7 @@ angular.module('dprApp')
         $scope.reset = function() {
             $scope.dprsetName = randomstring.generateid();
             $scope.currentset = $scope.dprsetName;
-            $scope.loadDprsetName = '';
+            $scope.loadDprsetKey = '';
             $scope.dprsets = [];
             $scope.dprrows = [];
             $scope.dprrows.push($scope.createdprrow());
