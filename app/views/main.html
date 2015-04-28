@@ -29,7 +29,7 @@
     </select>
     + <input type="number" class="short-num" ng-model="dprset.damageDiceBonus" required /> =
     <span>
-      {{ round(calculateDpr(dprset)) }}
+      {{ calculateDpr(dprset) | number }}
     </span>
     <span class="calculation-details">
       ( {{ calculateDamage(dprset) | number }} * {{ calculateMultiplicator(dprset.attack) | number }} )
