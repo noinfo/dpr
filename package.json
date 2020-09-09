@@ -2,7 +2,7 @@
   "name": "dpr",
   "version": "0.0.0",
   "dependencies": {
-    "bl": "^0.9.4",
+    "bl": "^4.0.3",
     "chalk": "^0.5.1",
     "end-of-stream": "^1.1.0",
     "findup-sync": "^0.2.1",
